@@ -22,6 +22,8 @@ function comprimeImage(){
         .pipe(gulp.dest('./build/images'))
 }
 
-exports.images = comprimeImage;
-exports.sass = compilaSass;
-exports.js = comprimeJs;
+exports.default = function(){
+    gulp.watch('./source/styles/*.scss',{ignoreInitial: false}, gulp.series(compilaSass))
+    gulp.watch('./source/images/*',{ignoreInitial: false}, gulp.series(comprimeImage))
+    gulp.watch('./source/scripts/*.js',{ignoreInitial: false}, gulp.series(comprimeJs))
+}
